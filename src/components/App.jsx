@@ -4,7 +4,8 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import { fetchPixabay } from './Api/Api';
 import Button from './BtnLoadMore/Button';
 import * as basicLightbox from 'basiclightbox';
-import * as S from '../components/App.styled';
+// import * as S from '../components/App.styled';
+import {Container} from './App.styled'
 
 export default class App extends Component {
   state = {
@@ -74,7 +75,7 @@ export default class App extends Component {
     console.log(isVisibleBtn);
 
     return (
-      <S.Container>
+      <Container>
         <Searchbar newUserQuery={this.newUserQuery} />
         <ImageGallery
           resultQuery={this.state.data}
@@ -83,7 +84,7 @@ export default class App extends Component {
         {isVisibleBtn && (
           <Button pageNum={this.state.page} loadMore={this.loadMore} />
         )}
-     </S.Container>
+     </Container>
     );
   }
 }
