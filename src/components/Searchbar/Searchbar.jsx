@@ -11,11 +11,11 @@ export default class Searchbar extends Component {
     });
   };
 
-  userFormSubmit = event=>{
-    event.preventDefault()
+  userFormSubmit = event => {
+    event.preventDefault();
     const userSearchQuery = this.state.query;
-    this.props.newUserQuery(userSearchQuery)
-  }
+    this.props.newUserQuery(userSearchQuery);
+  };
 
   render() {
     return (

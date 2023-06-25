@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-function Button() {
-  return (
-    <button>Load more...</button>
-  )
+export default class Button extends Component {
+  state = {
+    page: this.props.pageNum,
+  };
+
+  ClickLoadMore = () => {
+    this.props.loadMore();
+  };
+
+  render() {
+    return <button onClick={this.ClickLoadMore}>Load more...</button>;
+  }
 }
-
-export default Button
