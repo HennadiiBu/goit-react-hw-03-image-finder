@@ -59,7 +59,7 @@ export default class App extends Component {
     const data = this.state.data.find(elem => elem.id === parseInt(itemId));
 
     const instanse = basicLightbox.create(
-      `      <div class="overlay">
+      `<div class="overlay">
         <div class="modal">
           <img src=${data.largeImageURL} alt=${data.tags} />
         </div>
