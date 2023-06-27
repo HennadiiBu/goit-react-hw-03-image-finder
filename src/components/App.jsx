@@ -3,8 +3,6 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import { fetchPixabay } from './Api/Api';
 import Button from './BtnLoadMore/Button';
-import * as basicLightbox from 'basiclightbox';
-// import * as S from '../components/App.styled';
 import { Container } from './App.styled';
 import Modal from './Modal/Modal';
 
@@ -57,19 +55,6 @@ export default class App extends Component {
       this.userSearchQuery();
     }
   }
-
-  // clickToItem = itemId => {
-  //   const data = this.state.data.find(elem => elem.id === parseInt(itemId));
-
-  //   const instanse = basicLightbox.create(
-  //     `<div class="overlay">
-  //       <div class="modal">
-  //         <img src=${data.largeImageURL} alt=${data.tags} />
-  //       </div>
-  //     </div>`
-  //   );
-  //   instanse.show();
-  // };
 
   handleOpenModal = (src, alt) => {
     this.setState({ modal: { isOpen: true, src, alt }});
