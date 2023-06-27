@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from './Button.module.css'
 
 export default class Button extends Component {
   state = {
@@ -10,6 +11,6 @@ export default class Button extends Component {
   };
 
   render() {
-    return <button onClick={this.ClickLoadMore}>Load more...</button>;
+    return <button onClick={this.ClickLoadMore} className={style.loadMoreBtn}>Load more...</button>;
   }
 }

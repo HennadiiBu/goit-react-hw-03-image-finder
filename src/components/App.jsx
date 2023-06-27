@@ -5,7 +5,8 @@ import { fetchPixabay } from './Api/Api';
 import Button from './BtnLoadMore/Button';
 import * as basicLightbox from 'basiclightbox';
 // import * as S from '../components/App.styled';
-import {Container} from './App.styled'
+import { Container } from './App.styled';
+import Modal from './Modal/Modal';
 
 export default class App extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class App extends Component {
 
     totalHits: 0,
     pagesPerPage: 12,
+    modal: { isOpen: false, src: '', alt: '' },
   };
 
   newUserQuery = query => {
@@ -29,7 +31,8 @@ export default class App extends Component {
     try {
       const { hits, totalHits } = await fetchPixabay(
         this.state.searchQuery,
-        this.state.page
+        this.state.page,
+        this.state.pagesPerPage,
       );
       this.setState({
         data: [...this.state.data, ...hits],
@@ -55,36 +58,52 @@ export default class App extends Component {
     }
   }
 
-  clickToItem = itemId => {
-    const data = this.state.data.find(elem => elem.id === parseInt(itemId));
+  // clickToItem = itemId => {
+  //   const data = this.state.data.find(elem => elem.id === parseInt(itemId));
 
-    const instanse = basicLightbox.create(
-      `<div class="overlay">
-        <div class="modal">
-          <img src=${data.largeImageURL} alt=${data.tags} />
-        </div>
-      </div>`
-    );
-    instanse.show();
+  //   const instanse = basicLightbox.create(
+  //     `<div class="overlay">
+  //       <div class="modal">
+  //         <img src=${data.largeImageURL} alt=${data.tags} />
+  //       </div>
+  //     </div>`
+  //   );
+  //   instanse.show();
+  // };
+
+  handleOpenModal = (src, alt) => {
+    this.setState({ modal: { isOpen: true, src, alt }});
+    console.log(this.state)
+  };
+
+  handleCloseModal = () => {
+    this.setState(() => ({ modal: { isOpen: false, src: '', alt: '' } }));
   };
 
   render() {
     const isVisibleBtn =
       this.state.data.length !== 0 &&
       this.state.data.length < this.state.totalHits;
-    console.log(isVisibleBtn);
 
     return (
-      <Container>
-        <Searchbar newUserQuery={this.newUserQuery} />
+      <>
+        <Container>
+          <Searchbar newUserQuery={this.newUserQuery} />
+        </Container>
         <ImageGallery
           resultQuery={this.state.data}
           clickToItem={this.clickToItem}
+          openFullScreenMode={this.handleOpenModal}
         />
         {isVisibleBtn && (
           <Button pageNum={this.state.page} loadMore={this.loadMore} />
         )}
-     </Container>
+        {this.state.modal.isOpen && (
+          <Modal closeModal={this.handleCloseModal}>
+            <img src={this.state.modal.src} alt={this.state.modal.alt} />
+          </Modal>
+        )}
+      </>
     );
   }
 }
