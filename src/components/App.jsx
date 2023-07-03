@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import { fetchPixabay } from './Api/Api';
+import { fetchPixabay } from '../Api/Api';
 import Button from './BtnLoadMore/Button';
 import { Container } from './App.styled';
 import Modal from './Modal/Modal';
@@ -48,10 +48,7 @@ export default class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.searchQuery !== prevState.searchQuery) {
-      this.userSearchQuery();
-    }
-    if (this.state.page !== prevState.page) {
+    if (this.state.searchQuery !== prevState.searchQuery || this.state.page !== prevState.page) {
       this.userSearchQuery();
     }
   }
